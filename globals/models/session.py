@@ -14,7 +14,9 @@ connection_params = {}
 if 'SA' in db_data:
     connection_params.update(db_data['SA'])
 engine = create_engine(db_uri, **connection_params)
-Session = sessionmaker(bind=engine)
+#Session = sessionmaker(bind=engine)
+Session = sessionmaker(bind=engine, autoflush=True)
+
 
 session = Session()
 

@@ -8,7 +8,7 @@ from misc.mixins import myTemplateView, JSONView
 
 from utils.arp_list import get_mac_by_ip
 
-from models.all_models import InetEther
+from models.all_models import InetEther, ARPCache
 from models.session import session
 
 from utils.server.http_client import HTTPClient
@@ -17,15 +17,22 @@ from libs.pfctl import PFCtl
 
 class checkIPMixin(object):
     def check_for_ip(self):
-        self.request.remote_ether = get_mac_by_ip(self.request.remote_addr)
+        self.request.remote_ether = session.query(ARPCache).filter(ARPCache.ip==self.request.remote_addr).first()
+        if self.request.remote_ether is None:
+            logging.error('IP: %s not found in cached arp list!' % self.request.remote_addr)
+            self.request.remote_ether = get_mac_by_ip(self.request.remote_addr)
+        else:
+            self.request.remote_ether = self.request.remote_ether.mac
         if self.request.remote_ether is None or self.request.remote_addr is None:
             return None
 
         addr = session.query(InetEther).filter(InetEther.mac==self.request.remote_ether).first()
         if addr is None:
+            logging.error('XXX4.1')
             addr = InetEther()
             addr.mac = self.request.remote_ether
         if addr.ip != self.request.remote_addr or not addr.is_active:
+            logging.error('XXX4.2')
             addr.ip = self.request.remote_addr
             addr.is_active = True
             addr.lastupdate = func.now()
@@ -43,7 +50,9 @@ class cabinetView(checkIPMixin, myTemplateView):
         addr = self.check_for_ip()
         context = super(cabinetView, self).get_context_data(**kwargs)
         context['addr_obj'] = addr
-        if addr.access_type == 'tor':
+        if addr is None:
+            context['access_type'] = 'UNDEFINED'
+        elif addr.access_type == 'tor':
             context['access_type'] = 'TOR'
         else:
             context['access_type'] = 'DIRECT'

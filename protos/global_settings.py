@@ -12,8 +12,11 @@ DATABASES = {
     'default': {
         'URI': '@DB_TYPE_IDENT@://@DB_USER@:@DB_PASS@@@DB_HOST@:@DB_PORT@/@DB_NAME@',
         'SA': { 
-            'echo': False,
-            'pool_recycle': 3600,
+            'echo': True,
+            'pool_size': 10,
+            'pool_recycle':10,
+            ##'pool_recycle': 7200,
+
         },
     },
 }

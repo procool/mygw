@@ -1,3 +1,4 @@
+import logging
 import subprocess
 import re
 
@@ -23,8 +24,10 @@ def get_arp_list(iface=None):
 
 
 def get_mac_by_ip(ip, iface=None):
+    logging.error("DDD0 %s, %s" % (ip, iface))
     clients = get_arp_list(iface=iface)
     for cli in clients:
+        logging.error("DDD %s" % cli)
         if cli[1] == ip:
             try: clients.close()
             except: pass

@@ -52,6 +52,11 @@ if __name__ == '__main__':
     print "Creating custom account..."
     admin_login = raw_input("Username[%s]: " % admin_default_login) or admin_default_login
     admin_passwd = getpass.getpass("Password[%s]: " % admin_default_passwd) or admin_default_passwd
+    admin_passwd_r = getpass.getpass("Retype Password: ")
+    if admin_passwd != admin_passwd_r:
+        print "Passwords mismatch!"
+        exit(1)
+
 
     if get_or_create_user(admin_login, admin_passwd):
         print "Done!"

@@ -29,10 +29,12 @@ class ObjectViewMixin(object):
 
     def close_db_session(self):
         logging.info('Closing DB session...')
-        connection = session.connection()
-        connection.close()
-        session.close_all()
-        session.close()
+        #connection = session.connection()
+        #connection.close()
+        #session.close_all()
+        #session.close()
+        try: session.remove()
+        except: pass
 
     def prepare(self, *args, **kwargs):
         self.__qs_compiled = None
