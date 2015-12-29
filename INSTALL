@@ -27,7 +27,7 @@ py27-supervisor
 py27-gevent
 gettext
 
-# pkg install sudo bash mc nmap ngrep bind99 gmake isc-dhcp43-server mysql51-server redis mpd5 tor haproxy python27 py27-pip py27-gunicorn py27-supervisor py27-gevent gettext
+# pkg install sudo bash mc nmap ngrep bind99 gmake isc-dhcp43-server mysql51-server redis mpd5 tor haproxy python py27-pip py27-gunicorn py27-supervisor py27-gevent gettext
 
 ## Related PORTS:
 nginx with real_ip_header
@@ -88,7 +88,7 @@ chmod -R 700 /var/db/tor
 7. Init your named(bind) secret key:
 # rndc-confgen -a
 
-## !!! We not using squd now, so, you should skip next step: !!!
+## !!! We not using squid now, so, you should skip next step: !!!
 8. Init your SQUID directories:
 # sudo squid -z
 mkdir -p /usr/local/etc/squid/
