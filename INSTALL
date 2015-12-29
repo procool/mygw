@@ -17,6 +17,7 @@ isc-dhcp43-server
 mysql51-server
 redis
 mpd5
+privoxy
 tor
 #squid
 haproxy
@@ -27,7 +28,7 @@ py27-supervisor
 py27-gevent
 gettext
 
-# pkg install sudo bash mc nmap ngrep bind99 gmake isc-dhcp43-server mysql51-server redis mpd5 tor haproxy python py27-pip py27-gunicorn py27-supervisor py27-gevent gettext
+# pkg install sudo bash mc nmap ngrep bind99 gmake isc-dhcp43-server mysql51-server redis mpd5 privoxy tor haproxy python py27-pip py27-gunicorn py27-supervisor py27-gevent gettext
 
 ## Related PORTS:
 nginx with real_ip_header
@@ -94,7 +95,7 @@ chmod -R 700 /var/db/tor
 mkdir -p /usr/local/etc/squid/
 
 9. Create you privoxy server directories:
-# mkdir -p /usr/local/etc/privoxy/config
+# mkdir -p /usr/local/etc/privoxy
 
 ##########################################################
 ## Install Python packages:
