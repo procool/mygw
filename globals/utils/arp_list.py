@@ -18,8 +18,8 @@ def get_arp_list(iface=None):
             yield list(re_arp.findall(line_)[0])
         except:
             continue
-        finally:
-            raise ValueError
+        #finally:
+        #    raise ValueError
 
 
 def get_mac_by_ip(ip, iface=None):

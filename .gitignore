@@ -13,3 +13,5 @@ logs/*
 !logs/README
 
 
+globals/global_settings/local.py
+scripts/startup.sh
