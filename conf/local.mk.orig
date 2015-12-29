@@ -1,0 +1,46 @@
+OWNER             = mygw
+OWNER_GROUP       = projects
+
+ROOT              = /projects/mygw
+EMAIL             = root@localhost
+
+HOSTNAME	  = gw
+DOMAIN            = mynet.flat
+
+HTTPD_HOST        = ${HOSTNAME}.${DOMAIN}
+HTTPD_USER        = www
+HTTPD_GROUP       = www
+
+ROOTCOOKIE        = .${HTTPD_HOST}
+
+
+DEFAULTROUTER     = 10.10.2.1
+
+IF_INT            = re1
+ADDR_INT          = 192.168.0.1/24
+DHCP_RANGE        = 192.168.0.130 192.168.0.230
+
+IF_EXT            = re0
+IP_EXT            = DHCP
+IFCONFIG_EXT	  = ${IP_EXT}
+DNS1              = 10.10.2.1
+
+
+#IP_EXT            = 10.10.2.2
+#IFCONFIG_EXT	  = inet ${IP_EXT} netmask 255.255.255.0
+
+
+## Timediff TZ(hours) from UTC (e.g. for moscow: +3 or 3), int
+TIMEDIFF_TZ	= "3"
+
+DB_TYPE_IDENT   = mysql
+DB_USER         = root
+DB_PASS         = 
+DB_HOST         = localhost
+DB_PORT         = 3306
+DB_NAME         = mygw
+DB_SOCKET       = /tmp/mysql.sock
+
+MAKE              = gmake
+
+

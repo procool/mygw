@@ -1,0 +1,146 @@
+##########################################################
+########### Welcome to myGW Project! ###################
+
+This project tested with OS FreeBSD
+
+
+##########################################################
+## Related packages:
+sudo
+bash
+mc
+nmap
+ngrep
+bind99
+gmake
+isc-dhcp43-server
+mysql51-server
+redis
+mpd5
+tor
+#squid
+haproxy
+python
+py27-pip
+py27-gunicorn
+py27-supervisor
+py27-gevent
+gettext
+
+# pkg install sudo bash mc nmap ngrep bind99 gmake isc-dhcp43-server mysql51-server redis mpd5 tor haproxy python27 py27-pip py27-gunicorn py27-supervisor py27-gevent gettext
+
+## Related PORTS:
+nginx with real_ip_header
+
+
+## Be sure, that:
+
+0. make sure you set up lists of groups and users.
+It's highly recommend to create a special user account for the project
+for e.g. user 'mygw' and group 'projects';
+
+1. Supervisor global includes:
+# mkdir -p /usr/local/etc/supervisor
+# tail /usr/local/etc/supervisord.conf
+[include]
+files = supervisor/*.conf
+
+2. /usr/local/etc/nginx/nginx.conf:
+# mkdir -p /usr/local/etc/nginx/sites-enabled/
+# cat /usr/local/etc/nginx/nginx.conf:
+    server {
+        listen       81;
+        server_name  localhost;
+...
+    }
+    include /usr/local/etc/nginx/sites-enabled/*.conf;
+}
+
+
+3. tail /usr/src/sys/amd64/conf/MYCONF (copy from GENERIC): 
+options ALTQ
+options ALTQ_CBQ        # Class Bases Queuing
+options ALTQ_RED        # Random Early Direction
+options ALTQ_RIO        # RED In/Out
+options ALTQ_HFSC       # Hierarchical Packet Scheduler
+options ALTQ_PRIQ       # Priority Queuing
+options ALTQ_NOPCC      # Required for SMP build
+
+
+4. Init and create mySQL database, create new (for e.g.: 'mygw'):
+# /usr/local/etc/rc.d/mysql-server onestart
+# mysql 
+mysql> create database mygw; quit;
+
+5. setup your sudoers file (visudo):
+# it is very important to provide the project with access to the pfctl:
+mygw ALL = NOPASSWD: /sbin/pfctl, /sbin/shutdown
+
+
+6. Setup TOR:
+rm -r /var/db/tor /var/run/tor
+mkdir -p /var/db/tor/data /var/run/tor
+touch /var/log/tor
+chown -R _tor:_tor /var/db/tor /var/log/tor /var/run/tor
+chmod -R 700 /var/db/tor
+
+
+7. Init your named(bind) secret key:
+# rndc-confgen -a
+
+## !!! We not using squd now, so, you should skip next step: !!!
+8. Init your SQUID directories:
+# sudo squid -z
+mkdir -p /usr/local/etc/squid/
+
+9. Create you privoxy server directories:
+# mkdir -p /usr/local/etc/privoxy/config
+
+##########################################################
+## Install Python packages:
+
+sudo pip install supervisor
+sudo pip install flask
+sudo pip install gunicorn
+sudo pip install tornado                # statusd websockets daemon
+sudo pip install flaskcbv
+sudo pip install redis
+sudo pip install mysql
+sudo pip install sqlalchemy
+sudo pip install alembic
+
+
+
+##########################################################
+## CONFIGURATION:
+
+0. SetUp user and projects group
+
+1. Create your config file:
+  cp conf/local.mk{.orig,}
+
+2. Edit it:
+  vi conf/local.mk
+
+3. Make project configuration:
+  sudo gmake init
+
+
+4. Link created configurations of nginx and supervisor to same directories:
+  sudo gmake configs
+
+
+5. UPGRADE DB data with alembic:
+  cd globals
+  alembic upgrade head
+
+
+6. ReStart your system
+
+
+
+
+That's all, folks!
+
+
+Have fun!

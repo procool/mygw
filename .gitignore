@@ -1,0 +1,15 @@
+*.pyc
+*.pid
+*.log
+*.swp
+*.core
+*~
+web/static
+web/settings/local.py
+web/apps/wsgi.py
+conf/*
+!conf/*.orig
+logs/*
+!logs/README
+
+

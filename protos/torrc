@@ -1,0 +1,5 @@
+PIDFile /var/run/tor/tor.pid
+Log notice syslog
+DataDirectory /var/db/tor/data
+SocksPort 3127
+SocksListenAddress 127.0.0.1

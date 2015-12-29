@@ -1,0 +1,79 @@
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
+# vim: set expandtab shiftwidth=4:
+
+import os, sys
+import time
+import signal
+import logging
+import gevent
+
+logging.basicConfig(level=logging.DEBUG, format='%(levelname)s - - %(asctime)s %(message)s', datefmt='[%d/%b/%Y %H:%M:%S]')
+#logging.basicConfig(level=logging.INFO, format='%(levelname)s - - %(asctime)s %(message)s', datefmt='[%d/%b/%Y %H:%M:%S]')
+
+__import__('gevent.monkey').monkey.patch_all()
+
+import py_path
+
+from utils.server.tornado import TornadoDaemon
+from utils.server.tornado.http import TornadoHTTPDaemonBackend, TornadoHTTPDaemonServer
+
+from mygwcontroldclass.core import application, coreEngine
+
+
+
+class HTTPServer(TornadoHTTPDaemonServer):
+    name = 'httpserver'
+    application = application
+    port = 7000
+
+    def __init__(self, *args, **kwargs):
+        self.engine = coreEngine(self)
+        self.application.server = self
+        return super(HTTPServer, self).__init__(*args, **kwargs)
+
+    def run_every_time(self):
+        while True:
+            if self.is_exit:
+                return False
+
+            try: self.engine.run_every_time()
+            except Exception as err:
+                logging.error("RUN EVERY TIME EXCEPTION: {0}".format(err.message) )
+
+            time.sleep(1)
+
+
+
+class HTTPBackend(TornadoHTTPDaemonBackend):
+    pass
+
+
+class Daemon(TornadoDaemon):
+
+    def run_after(self, backends):
+        for backend in backends:
+            logging.info("%s Started! %s %s" % (backend.server.name, backend.server.host, backend.server.port))
+
+            ## Host must be specified:
+            if backend.server.host is None or backend.server.host == '':
+                continue
+
+    def sig_handler(self, sig_num=None, frame=None):
+        logging.debug("Quiting...")
+        super(Daemon, self).sig_handler(sig_num, frame)
+
+    ## Redefine for gevent:
+    def set_signals(self):
+        gevent.signal(signal.SIGQUIT, self.sig_handler)
+        gevent.signal(signal.SIGTERM, self.sig_handler)
+        gevent.signal(signal.SIGINT, self.sig_handler)
+        ##super(Daemon, self).set_signals()
+
+
+if __name__ == "__main__":
+    daemon = Daemon([
+        [HTTPBackend, HTTPServer], 
+    ])
+    daemon.cli()
+
