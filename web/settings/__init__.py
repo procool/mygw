@@ -7,7 +7,7 @@ APPLICATIONS = (
 )
 
 DEFAULT_HEADERS = {
-    'server' : 'myTaxi WEB Server',
+    'server' : 'myGW WEB Server',
 }
 
 try:
