@@ -3,7 +3,7 @@ from global_settings import settings as GLOBAL
 FLASKCONFIG = 'flaskconfig'
 
 APPLICATIONS = (
-    'mainpage', 
+    'mainpage', 'cabinet',
 )
 
 DEFAULT_HEADERS = {
