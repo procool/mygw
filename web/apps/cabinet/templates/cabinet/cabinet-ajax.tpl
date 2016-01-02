@@ -1,4 +1,5 @@
-
+<br>
+<br>
 Your ip: '{{ REQUEST.remote_addr }}'
 <br>
 Your mac: '{{ REQUEST.remote_ether }}'

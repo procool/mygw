@@ -67,6 +67,7 @@ configs-freebsd: init
 init: build_protos
 	${call build_exec, ${PROTOS}/start.py, ${APPS}/start.py}
 	${call build_exec, ${PROTOS}/startup.sh, ${SCRIPTS}/startup.sh}
+	@python ${SCRIPTS}/create_user admin
 #	${call build_exec}
 
 compat_links:

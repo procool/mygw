@@ -1,0 +1,63 @@
+#!/usr/bin/env python
+
+import sha 
+import sys
+import logging
+import getpass
+
+import cron.py_path
+from global_settings import settings
+from models.session import session
+from models.base import get_model
+
+Users = get_model('users.Users')
+
+admin_default_login = 'admin'
+admin_default_passwd = 'admin'
+
+def check_for_users():
+    fuser = session.query(Users).first()
+    if fuser is not None:
+        return True
+    return False
+    
+def check_for_user(login, passwd):
+    user = session.query(Users).filter(Users.login==login).first()
+    if user is not None:
+        return True
+    return False
+
+def get_or_create_user(login, passwd):
+    if (check_for_user(login, passwd)):
+        logging.error('Allready exist!')
+        return False
+
+    passwd = sha.new(passwd).hexdigest()
+    user = Users(login=login, passwd=passwd, status=2, is_active=True)
+    session.add(user)
+    session.commit()
+    return True
+
+
+if __name__ == '__main__':
+    
+    try:
+        if sys.argv[1] == 'admin' and check_for_users():
+            print "Users are allready existed..."
+            exit(0)
+    except Exception as err:
+        print err
+        pass
+
+    print "Creating custom account..."
+    admin_login = raw_input("Username[%s]: " % admin_default_login) or admin_default_login
+    admin_passwd = getpass.getpass("Password[%s]: " % admin_default_passwd) or admin_default_passwd
+
+    if get_or_create_user(admin_login, admin_passwd):
+        print "Done!"
+    else:
+        print "Failed!"
+
+    raw_input("Press any key to exit...")
+
+

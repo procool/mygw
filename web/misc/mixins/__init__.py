@@ -2,7 +2,7 @@ from jinja2.exceptions import TemplateNotFound
 from flask import request, render_template
 from flaskcbv.response import Response
 from flaskcbv.view import View, TemplateIsAjaxView
-from flaskcbv.view.mixins import JSONMixin
+from flaskcbv.view.mixins import JSONMixin, getArgumentMixin
 from flaskcbv.conf import settings
 
 
@@ -21,7 +21,7 @@ class DefaultContextVars(object):
 
 
 
-class myTemplateView(DefaultContextVars, TemplateIsAjaxView):
+class myTemplateView(DefaultContextVars, getArgumentMixin, TemplateIsAjaxView):
 
     def render_template(self, *args, **kwargs):
         try:
@@ -33,7 +33,7 @@ class myTemplateView(DefaultContextVars, TemplateIsAjaxView):
 
 
 
-class JSONView(JSONMixin, View):
+class JSONView(getArgumentMixin, JSONMixin, View):
 
     def get_json_indent(self):
         return self.__json_indent

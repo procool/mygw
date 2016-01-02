@@ -1,10 +1,12 @@
-<a href="#cabinet">Cabinet</a>
-<a href="#">Adminko</a>
-<br>
-<br>
+<div class="maincontent_wrapped">
+<ul class="tabs">
+    <li><a href="#cabinet" class="cabinet" title="Cabinet">Cabinet</a></li>
+    <li><a href="#adminko" class="adminko" title="Adminko">Adminko</a></li>
+</ul>
 
 <div id="maincontent_wrapper">
 Wait!
+</div>
 </div>
 
 
