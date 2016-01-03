@@ -19,3 +19,6 @@ from auth import LoginRequiredMixin, LoginRequiredRedirectMixin
 class adminView(LoginRequiredRedirectMixin, myTemplateView):
     template='admin/admin-ajax.tpl'
 
+
+class statusView(LoginRequiredRedirectMixin, myTemplateView):
+    template='admin/status-ajax.tpl'

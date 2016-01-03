@@ -2,7 +2,7 @@
     <div class="tabs_wrapper">
       <ul class="tabs">
         <li><a href="#cabinet" class="cabinet" title="Cabinet">Cabinet</a></li>
-        <li><a href="#adminko" class="adminko" title="Adminko">Adminko</a></li>
+        <li><a href="#adminko/status" class="adminko" title="Adminko">Adminko</a></li>
       </ul>
     </div>
 

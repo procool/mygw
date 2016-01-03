@@ -1,3 +1,5 @@
+var last_location = '';
+var location_only_part = false;
 var setTab = function(elem) {
     $(".tabs li").attr("id","");
     elem.parent().attr("id","current");
@@ -22,18 +24,25 @@ var sammy_app = $.sammy(function() {
             params.success = function(tpl) {
                 admin_load_part(part, route);
             }
- 
-        admin_load($('#maincontent_wrapper'), COMMON_URLS['admin'], params)
+        admin_load($('#maincontent_wrapper'), COMMON_URLS['admin'], params);
     }
 
 
-
-    this.get('#adminko', function(context, next) {
-        load_adminko();
+    this.bind('run-route', function(e, data) {
+        var new_location = sammy_app.getLocation();
+        if (last_location.match(/^\/#adminko/) && new_location.match(/^\/#adminko/)) 
+            location_only_part = true;
+        else
+            location_only_part = false;
+        last_location = new_location;
     });
 
+
     this.get('#adminko/:part', function(context, next) {
-        load_adminko(this.params['part'], this);
+        if (!location_only_part)
+            load_adminko(this.params['part'], this);
+        else
+            admin_load_part(this.params['part'], this);
     });
 
 

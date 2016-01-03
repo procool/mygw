@@ -75,9 +75,29 @@ function admin_load(jQwrapper, url, params) {
 
 function admin_load_part(part, route) {
     console.log('Calling part: ' + part);
+
     if (part == 'refresh') {
         console.log('Makeing refresh...');
         route.redirect('#adminko');
         sammy_app.refresh();
+
+    } else if (part == 'status') {
+        $('.admin_content_wrapper').load(COMMON_URLS['admin_status']);
+    } else if (part == 'nw_access_lists') {
+        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+    } else if (part == 'nw_dhcp') {
+        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+    } else if (part == 'nw_dns') {
+        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+    } else if (part == 'sys_users') {
+        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+    } else if (part == 'sys_srv_vpn') {
+        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+    } else if (part == 'sys_srv_dns') {
+        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+    } else if (part == 'sys_srv_dhcp') {
+        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
     }
 }
+
+

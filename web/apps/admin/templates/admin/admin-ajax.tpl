@@ -4,22 +4,22 @@
   <!-- Start of Menu -->
   <div id="cssmenu">
     <ul>
-      <li><a href="#adminko"><span>STATUS</span></a></li>
-      <li class="has-sub"><a href="#adminko"><span>NETWORK</span></a>
+      <li><a href="#adminko/status"><span>STATUS</span></a></li>
+      <li class="has-sub"><a href="#adminko/network"><span>NETWORK</span></a>
         <ul>
-          <li><a href="#adminko"><span>Access lists</span></a></li>
-          <li><a href="#adminko"><span>DHCP</span></a></li>
-          <li><a href="#adminko"><span>DNS</span></a></li>
+          <li><a href="#adminko/nw_access_lists"><span>Access lists</span></a></li>
+          <li><a href="#adminko/nw_dhcp"><span>DHCP</span></a></li>
+          <li><a href="#adminko/nw_dns"><span>DNS</span></a></li>
         </ul>
       </li>
       <li class="has-sub"><a href="#adminko"><span>SYSTEM</span></a>
         <ul>
           <li><a href="#adminko"><span>Users</span></a></li>
-          <li class="has-sub"><a href="#adminko"><span>Services</span></a>
+          <li class="has-sub"><a href="#adminko/sys_users"><span>Services</span></a>
             <ul>
-              <li><a href="#adminko"><span>VPN Server</span></a></li>
-              <li><a href="#adminko"><span>DNS</span></a></li>
-              <li><a href="#adminko"><span>DHCP</span></a></li>
+              <li><a href="#adminko/sys_srv_vpn"><span>VPN Server</span></a></li>
+              <li><a href="#adminko/sys_srv_dns"><span>DNS</span></a></li>
+              <li><a href="#adminko/sys_srv_dhcp"><span>DHCP</span></a></li>
             </ul>
           </li>
         </ul>
