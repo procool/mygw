@@ -5,9 +5,7 @@ import redis
 import logging
 import gevent
 
-from utils import asDictMixin
-
-class Message(asDictMixin):
+class Message(dict):
 
     def __init__(self, message=None, **kwargs):
 
@@ -22,12 +20,14 @@ class Message(asDictMixin):
             if has_slots and attr not in self.__slots__:
                 continue
             setattr(self, attr, kwargs[attr])
+            self[attr] = kwargs[attr]
 
         ## If slots, set None for any used attr as default:
         if has_slots:
             for attr in self.__slots__:
                 if not hasattr(self, attr):
                     setattr(self, attr, None)
+                    self[attr] = None
 
 
 
@@ -117,7 +117,7 @@ class myRedis(object):
     ## !!! 'message' arg should be a Message instance !!!
     def sendpack(self, message=None, flush=False, **kwargs):
         if message is not None:
-            self.pack.append(message.as_dict())
+            self.pack.append(message)
 
         if flush and len(self.pack)>0:
             if self.use_gevent:

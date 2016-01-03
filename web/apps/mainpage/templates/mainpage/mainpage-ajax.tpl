@@ -1,12 +1,18 @@
-<div class="maincontent_wrapped">
-<ul class="tabs">
-    <li><a href="#cabinet" class="cabinet" title="Cabinet">Cabinet</a></li>
-    <li><a href="#adminko" class="adminko" title="Adminko">Adminko</a></li>
-</ul>
+<div class="wrapper">
+    <div class="tabs_wrapper">
+      <ul class="tabs">
+        <li><a href="#cabinet" class="cabinet" title="Cabinet">Cabinet</a></li>
+        <li><a href="#adminko" class="adminko" title="Adminko">Adminko</a></li>
+      </ul>
+    </div>
 
-<div id="maincontent_wrapper">
-Wait!
-</div>
+    <div class="middle">
+      <div id="maincontent_wrapper">
+        Wait!
+      </div>
+    </div>
+
+    <div class="push"></div>
 </div>
 
 

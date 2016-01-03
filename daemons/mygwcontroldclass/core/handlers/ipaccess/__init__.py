@@ -30,7 +30,13 @@ class ipAccessHandler(tornado.web.RequestHandler):
         proxy = None
         if client.access_type in PFCtl.ip_proxy_types:
             proxy = PFCtl.ip_proxy_types[client.access_type]
-        PFCtl.set_ip_proxy(client.ip, proxy)
+
+        def new_task():
+            PFCtl.set_ip_proxy(client.ip, proxy)
+
+        engine = self.application.server.engine
+        engine.add_task(new_task, name='ipaccess', ip=ip, proxy=client.access_type)
+
 
         return {'ip': ip, 'access': client.access_type,}
         ##return 400

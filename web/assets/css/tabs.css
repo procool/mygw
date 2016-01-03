@@ -1,9 +1,14 @@
+.tabs_wrapper{
+  display: table-row;
+}
+
 .tabs{
   overflow: hidden;
   width: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
+  display: table-cell;
 }
 
 .tabs li{
@@ -14,7 +19,7 @@
 .tabs a{
   position: relative;
   background: #ddd;
-  background-image: linear-gradient(to bottom, #fff, #ddd);
+  background-image: linear-gradient(to bottom, #fdfdfd, #ddd);
   padding: .7em 3.5em;
   float: left;
   text-decoration: none;
@@ -28,7 +33,7 @@
 .tabs a:hover::after,
 .tabs a:focus,
 .tabs a:focus::after{
-  background: #fff;
+  background: #fafafa;
 }
 
 .tabs a:focus{
@@ -44,7 +49,7 @@
   bottom: 0;
   width: 1em;
   background: #ddd;
-  background-image: linear-gradient(to bottom, #fff, #ddd);
+  background-image: linear-gradient(to bottom, #fdfdfd, #ddd);
   box-shadow: 2px 2px 2px rgba(0,0,0,.4);
   transform: skew(10deg);
   border-radius: 0 5px 0 0;
@@ -52,7 +57,7 @@
 
 .tabs #current a,
 .tabs #current a::after{
-  background: #fff;
+  background: #fdfdfd;
   z-index: 3;
 }
 
