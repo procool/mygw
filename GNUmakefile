@@ -48,6 +48,7 @@ configs-freebsd: init
 	@ln -sf ${SCRIPTS}/startup.sh /usr/local/etc/rc.d/z_mygw_startup.sh
 	@cp ${CONFIG}/dhcpd.conf /usr/local/etc/dhcpd.conf
 	@cp ${CONFIG}/named.conf /usr/local/etc/namedb/named.conf
+	@cp ${CONFIG}/named.local-zone.conf /usr/local/etc/namedb/master/${DOMAIN}
 	@cp ${CONFIG}/rc.conf /etc/rc.conf
 	@cp ${CONFIG}/pf.conf /etc/pf.conf
 	@cp ${PROTOS}/fingerprints /etc/fingerprints
@@ -94,6 +95,7 @@ build_protos: make_dirs compat_links
 	${call build, ${PROTOS}/torrc, ${CONFIG}/torrc}
 	${call build, ${PROTOS}/hosts, ${CONFIG}/hosts}
 	${call build, ${PROTOS}/resolv.conf, ${CONFIG}/resolv.conf}
+	${call build, ${PROTOS}/named.local-zone.conf, ${CONFIG}/named.local-zone.conf}
 
 make_dirs:
 	@mkdir -p ${PROTOS} 2>/dev/null
