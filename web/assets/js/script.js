@@ -15,20 +15,25 @@ var sammy_app = $.sammy(function() {
         });
     }
 
-    function load_adminko () {
+    function load_adminko (part, route) {
         setTab($(".tabs a.adminko"));
-        show_loading_img();
-        $('#maincontent_wrapper').load(COMMON_URLS['admin'], null, function(tpl) {
-            $(this).hide();
-            $(this).html(tpl);
-            $(this).fadeIn();
-        });
+        var params = {};
+        if (part)
+            params.success = function(tpl) {
+                admin_load_part(part, route);
+            }
+ 
+        admin_load($('#maincontent_wrapper'), COMMON_URLS['admin'], params)
     }
 
 
 
     this.get('#adminko', function(context, next) {
         load_adminko();
+    });
+
+    this.get('#adminko/:part', function(context, next) {
+        load_adminko(this.params['part'], this);
     });
 
 

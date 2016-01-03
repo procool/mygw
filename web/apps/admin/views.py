@@ -14,8 +14,8 @@ from models.session import session
 from utils.server.http_client import HTTPClient
 from libs.pfctl import PFCtl
 
-from auth import LoginRequiredMixin
+from auth import LoginRequiredMixin, LoginRequiredRedirectMixin
 
-class adminView(LoginRequiredMixin, myTemplateView):
+class adminView(LoginRequiredRedirectMixin, myTemplateView):
     template='admin/admin-ajax.tpl'
 

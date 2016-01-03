@@ -1,3 +1,4 @@
+import logging
 import sha
 
 from flask import redirect, url_for, abort, session as flask_session
@@ -14,20 +15,37 @@ from models.session import session
 from sessions import Sessions
 
 
-class LoginRequiredMixin(object):
+class AuthMixin(object):
+    def _check_for_auth(self):
+        session_ = flask_session['session']
+        uid = Sessions.check(session_)
+        if uid is None:
+            raise Exception('no such session!')
+        user = session.query(Users).filter(Users.id==uid).first()
+        if user is None:
+            raise Exception('no such user!')
+        self.request.user = user
+
+
+
+class LoginRequiredRedirectMixin(AuthMixin):
     def prepare(self, *args, **kwargs):
         try:
-            session_ = flask_session['session']
-            uid = Sessions.check(session_)
-            if uid is None:
-                raise Exception('no such session!')
-            user = session.query(Users).filter(Users.id==uid).first()
-            if user is None:
-                raise Exception('no such user!')
-            self.request.user = user
+            self._check_for_auth()
         except Exception as err:
             return redirect(url_for('admin:login'))
+        return super(LoginRequiredRedirectMixin, self).prepare(*args, **kwargs)
+      
+
+class LoginRequiredMixin(AuthMixin):
+    def prepare(self, *args, **kwargs):
+        try:
+            self._check_for_auth()
+        except Exception as err:
+            abort(403)
         return super(LoginRequiredMixin, self).prepare(*args, **kwargs)
+
+
 
 
 class loginView(myTemplateView):
@@ -51,7 +69,10 @@ class testloginView(getArgumentMixin, JSONMixin, View):
         except Exception as err: 
             abort(403)
 
-        passwd = sha.new(passwd).hexdigest()
+        try: 
+            passwd = sha.new(passwd).hexdigest()
+        except:
+            abort(403)
         user = session.query(Users).filter(Users.login==login).filter(Users.passwd==passwd).first()
         if user is None:
             abort(403)

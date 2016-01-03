@@ -44,3 +44,40 @@ function admin_login() {
      
 
 }
+
+
+
+function admin_load(jQwrapper, url, params) {
+    if (!params)
+        params = {}
+    if (!params.statusCode)
+        params.statusCode = {}
+
+    params.statusCode[403] = function() {
+        console.log('forbidden!');
+    }
+
+    var callback_ = null;
+    if (params.success)
+        callback_ = params.success;
+
+    params.success = function(tpl) {
+        jQwrapper.hide();
+        jQwrapper.html(tpl);
+        jQwrapper.fadeIn();
+        if (callback_)
+            callback_(tpl);
+    }
+
+    $.ajax(url, params);
+}
+
+
+function admin_load_part(part, route) {
+    console.log('Calling part: ' + part);
+    if (part == 'refresh') {
+        console.log('Makeing refresh...');
+        route.redirect('#adminko');
+        sammy_app.refresh();
+    }
+}
