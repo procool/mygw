@@ -4,24 +4,27 @@
   <!-- Start of Menu -->
   <div id="cssmenu">
     <ul>
-      <li class="active"><a href="#adminko"><span>Item_1</span></a></li>
-      <li class="has-sub"><a href="#adminko"><span>Item_2</span></a>
+      <li><a href="#adminko"><span>STATUS</span></a></li>
+      <li class="has-sub"><a href="#adminko"><span>NETWORK</span></a>
         <ul>
-          <li class="has-sub"><a href="#adminko"><span>Item_2-1</span></a>
+          <li><a href="#adminko"><span>Access lists</span></a></li>
+          <li><a href="#adminko"><span>DHCP</span></a></li>
+          <li><a href="#adminko"><span>DNS</span></a></li>
+        </ul>
+      </li>
+      <li class="has-sub"><a href="#adminko"><span>SYSTEM</span></a>
+        <ul>
+          <li><a href="#adminko"><span>Users</span></a></li>
+          <li class="has-sub"><a href="#adminko"><span>Services</span></a>
             <ul>
-              <li><a href="#adminko"><span>Item_2-1-1</span></a></li>
-              <li><a href="#adminko"><span>Item_2-1-2</span></a></li>
-            </ul>
-          </li>
-          <li class="has-sub"><a href="#adminko"><span>Item_2-2</span></a>
-            <ul>
-              <li><a href="#adminko"><span>Item_2-2-1</span></a></li>
-              <li><a href="#adminko"><span>Item_2-2-2</span></a></li>
+              <li><a href="#adminko"><span>VPN Server</span></a></li>
+              <li><a href="#adminko"><span>DNS</span></a></li>
+              <li><a href="#adminko"><span>DHCP</span></a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="#adminko/refresh"><span>REFRESH</span></a></li>
+      <!--li><a href="#adminko/refresh"><span>REFRESH</span></a></li-->
       <li><a href="#logout"><span>LOGOUT</span></a></li>
     </ul>
   </div>

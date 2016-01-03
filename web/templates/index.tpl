@@ -25,7 +25,9 @@
 {% endblock %}
 
 <div class="footer">
-    <p>Copyright (c) 2016</p>
+  <div class="copyright">
+    <p>(c) procool@, prmim 2016</p>
+  </div>
 </div>
 
     <script type="text/javascript" src="{{ STATIC_URL }}/js/script.js"></script>

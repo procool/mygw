@@ -123,3 +123,10 @@ img {
 }
 
 
+.copyright {
+    float: right;
+    font-size: 13px;
+    color: #888888;
+    padding-top: 5px;
+    padding-right: 5px;
+}
