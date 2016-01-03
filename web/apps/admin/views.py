@@ -16,9 +16,26 @@ from libs.pfctl import PFCtl
 
 from auth import LoginRequiredMixin, LoginRequiredRedirectMixin
 
-class adminView(LoginRequiredRedirectMixin, myTemplateView):
+class adminView(LoginRequiredMixin, myTemplateView):
     template='admin/admin-ajax.tpl'
 
 
-class statusView(LoginRequiredRedirectMixin, myTemplateView):
+class statusView(LoginRequiredMixin, myTemplateView):
     template='admin/status-ajax.tpl'
+
+
+class shutdownView(LoginRequiredMixin, JSONView):
+    __ctlsrv = HTTPClient(port=6999)
+    
+    def get_context_data(self, **kwargs):
+        context = super(shutdownView, self).get_context_data(**kwargs)
+        cmd = self.__cmd == 'poweroff' and 'poweroff' or 'reboot'
+        r = self.__ctlsrv.call_handler('system/%s' % cmd)
+        context['result'] = r
+        return context
+            
+            
+    def dispatch(self, request, command, *args, **kwargs):
+        self.__cmd = command.lower()
+        return super(shutdownView, self).dispatch(self, request, *args, **kwargs)
+

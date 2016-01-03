@@ -8,3 +8,37 @@
     width: 50px;
 }
 
+
+.button {
+    background-color: #669999;
+    padding:10px;
+    margin:5px;
+    position:relative;
+    font-family: 'Open Sans', sans-serif;
+    font-size:12px;
+    text-decoration:none;
+    color: #fff;
+    box-shadow: inset 0px 1px 0px #b2f17f, 0px 6px 0px #336666;
+    border-radius: 5px;
+    font-weight: bolder;
+    cursor: pointer;
+    width: 100px;
+    text-align: center;
+}
+
+.button:active {
+    top:2px;
+    box-shadow: inset 0px 1px 0px #336666, inset 0px -4px 0px #336666;
+    color: #003333;
+    text-shadow: 0px 1px 1px #99CCCC;
+    background: #669999; //#336666; //#669966; //#009966; //#339966; // #339999;
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}

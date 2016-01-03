@@ -42,7 +42,7 @@ class LoginRequiredMixin(AuthMixin):
         try:
             self._check_for_auth()
         except Exception as err:
-            abort(403)
+            abort(401)
         return super(LoginRequiredMixin, self).prepare(*args, **kwargs)
 
 

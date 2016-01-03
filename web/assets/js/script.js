@@ -45,6 +45,9 @@ var sammy_app = $.sammy(function() {
             admin_load_part(this.params['part'], this);
     });
 
+    this.get('#adminko', function(context, next) {
+        this.redirect('#adminko/status');
+    });
 
     this.get('/', function(context, next) {
         load_cabinet();
@@ -61,6 +64,11 @@ var sammy_app = $.sammy(function() {
         $.getJSON(COMMON_URLS['cabinet_set_access_'+acctype], {}, function(data) {
             this_.redirect('#cabinet');
         });
+    });
+
+
+    this.get('#login', function(context, next) {
+        $('#maincontent_wrapper').load(COMMON_URLS['login'])
     });
 
     this.get('#logout', function(context, next) {

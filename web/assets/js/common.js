@@ -38,7 +38,7 @@ function admin_login() {
         },
 
         success: function(msg) {
-            sammy_app.refresh();
+            sammy_app.setLocation('#adminko/status');
         }
     })
      
@@ -47,16 +47,34 @@ function admin_login() {
 
 
 
-function admin_load(jQwrapper, url, params) {
+function admin_geturl(url, params) {
     if (!params)
         params = {}
     if (!params.statusCode)
         params.statusCode = {}
+                
+    params.statusCode[401] = function() {
+        console.log('unauthorized!');
+        sammy_app.setLocation('#login');
+    }
+             
+    var callback_ = null;
+    if (params.success)
+        callback_ = params.success;
 
-    params.statusCode[403] = function() {
-        console.log('forbidden!');
+    params.success = function(tpl) {
+        if (callback_)
+            callback_(tpl);
     }
 
+    $.ajax(url, params);
+}
+
+
+
+function admin_load(jQwrapper, url, params) {
+    if (!params)
+        params = {}
     var callback_ = null;
     if (params.success)
         callback_ = params.success;
@@ -68,8 +86,7 @@ function admin_load(jQwrapper, url, params) {
         if (callback_)
             callback_(tpl);
     }
-
-    $.ajax(url, params);
+    admin_geturl(url, params);
 }
 
 
@@ -82,21 +99,21 @@ function admin_load_part(part, route) {
         sammy_app.refresh();
 
     } else if (part == 'status') {
-        $('.admin_content_wrapper').load(COMMON_URLS['admin_status']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['admin_status']);
     } else if (part == 'nw_access_lists') {
-        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'nw_dhcp') {
-        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'nw_dns') {
-        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'sys_users') {
-        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'sys_srv_vpn') {
-        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'sys_srv_dns') {
-        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'sys_srv_dhcp') {
-        $('.admin_content_wrapper').load(COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     }
 }
 

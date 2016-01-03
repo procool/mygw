@@ -7,5 +7,7 @@ var COMMON_URLS = {
     'logout': '{{ url_for('admin:logout') }}',
     'admin': '{{ url_for('admin:main') }}',
     'admin_status': '{{ url_for('admin:status') }}',
+    'admin_sys_reboot': '{{ url_for('admin:system_shutdown', command='reboot') }}',
+    'admin_sys_poweroff': '{{ url_for('admin:system_shutdown', command='poweroff') }}',
     'underconstruction': '{{ url_for('mainpage:underconstruction') }}'
 };

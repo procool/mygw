@@ -14,8 +14,8 @@
       </li>
       <li class="has-sub"><a href="#adminko"><span>SYSTEM</span></a>
         <ul>
-          <li><a href="#adminko"><span>Users</span></a></li>
-          <li class="has-sub"><a href="#adminko/sys_users"><span>Services</span></a>
+          <li><a href="#adminko/sys_users"><span>Users</span></a></li>
+          <li class="has-sub"><a href="#adminko"><span>Services</span></a>
             <ul>
               <li><a href="#adminko/sys_srv_vpn"><span>VPN Server</span></a></li>
               <li><a href="#adminko/sys_srv_dns"><span>DNS</span></a></li>

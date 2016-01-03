@@ -130,3 +130,44 @@ img {
     padding-top: 5px;
     padding-right: 5px;
 }
+
+
+.lk_network_attributes {
+    position:relative;
+    background-color: #cccccc;
+    padding: 5px;
+    top: -1px;
+    overflow: hidden;
+    font-weight: bolder;
+}
+
+.lk_network_attribute {
+    background-color: white;
+    border: #999999 solid 1px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.lk_network_attr_var {
+    font-size: 17px;
+    background-color: none;
+    float: left;
+    width: 150px;
+}
+
+.lk_network_attr_val {
+    font-size: 17px;
+    background-color: none;
+    width: 480px;
+    background-color: none;
+}
+
+.lk_contype_selection {
+    font-weight: normal;
+}
+
+.lk_contype_val {
+    margin-top: 30px;
+    font-size: 25px;
+}
+
