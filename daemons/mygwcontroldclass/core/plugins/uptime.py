@@ -6,15 +6,25 @@ from base import Extention
 
 class upTime(Extention):
     enabled=True
-    timeout=20
+    timeout=5
+    timeout_type=None
     cmd='uptime'
 
     @classmethod
     def get_uptime(cls, engine):
         proc = subprocess.Popen(cls.cmd, shell=True, stdout=subprocess.PIPE)
-        uptime_ = proc.stdout.readline()
+        uptime_ = proc.stdout.readline().strip()
         avg = os.getloadavg()
-        engine.logaction(ident='plugin_uptime', uptime=uptime_, load_average=avg)
+        try:
+            idx = uptime_.index(', load averages')
+            uptime_ = uptime_[0:idx]
+        except: pass
+        load_average = {
+            0: "%.2f" % avg[0],
+            1: "%.2f" % avg[1],
+            2: "%.2f" % avg[2],
+        }
+        engine.logaction(ident='plugin_uptime', uptime=uptime_, load_average=load_average)
 
 
 

@@ -1,3 +1,28 @@
+client_session = null;
+function client_session_set(session) {
+    if (session == client_session)
+        return
+    client_session = session;
+    client_session_send(session);
+}
+
+function client_session_send(session, ws_) {
+    if (!ws_)
+        ws_ = wS;
+    if (!ws_)
+        return
+
+    if (!session)
+        session = client_session
+
+    // TODO: Update client session in WS:
+    console.log('Sending session: ' + session);
+    wS.send(JSON.stringify({
+        sessionid: session,
+        command: "auth"
+    }));
+}
+
 function show_loading_img(jQelem) {
     if (!jQelem)
         jQelem = $("#maincontent_wrapper");

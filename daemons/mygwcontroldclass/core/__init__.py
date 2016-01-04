@@ -31,13 +31,16 @@ application = tornado.web.Application([
 class coreEngine(object):
 
     server_name = 'myGW Control Server'
-    redis = myRedis(instance='mygwcontrold', channel='statusd_channel')
+    redis = myRedis(instance='mygwcontrold', channel='status_channel')
 
     def __init__(self, server):
         self.server = server
         self.tasks = []
         self.plugins = Plugins
 
+        for ext_ in Plugins.get_enabled_extensions():
+            try: ext_().init(self)
+            except: pass
 
     @classmethod
     def logaction(cls, **kwargs):

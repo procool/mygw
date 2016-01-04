@@ -50,5 +50,6 @@ Admin page
 
 <script type="text/javascript">
     setup_menu();
+    client_session_set('{{ request.session }}');
 </script>
 

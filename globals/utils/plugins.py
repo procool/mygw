@@ -57,6 +57,7 @@ class Plugins(object):
 
     @classmethod
     def add_extension(cls, extension, name=None, extname=None):
+        logging.info("PLUGIN: Loading extention: %s/%s" % (name, extname))
         cls.extensions.append(Extention(extension, name, extname))
 
     @classmethod
@@ -69,6 +70,7 @@ class Plugins(object):
 
     @classmethod
     def init(cls, dirpath='plugins'):
+        loaded_files = []
         path_ = cls.get_plugins_path(dirpath)
         sys.path.append(path_)
         if path_ is None:
@@ -82,7 +84,12 @@ class Plugins(object):
             if not stat.S_ISREG(fstat.st_mode):
                 is_file = False
 
-            try: cls.register_plugin(name, fpath, is_file)
+            filename, file_extension = os.path.splitext(fpath)
+            if filename in loaded_files:
+                continue
+            try: 
+                cls.register_plugin(name, fpath, is_file)
+                loaded_files.append(filename)
             except Exception as err: 
                 logging.error('Error on loading plugin: %s: %s' % (name, err))
 

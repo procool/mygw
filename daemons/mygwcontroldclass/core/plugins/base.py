@@ -1,4 +1,5 @@
 from random import randrange
+import logging
 import time
 
 class Extention(object):
@@ -7,11 +8,17 @@ class Extention(object):
     lastupdate = time.time()
     __nextupdate = None
     timeout = 15
+    timeout_type = 'rand'
+
+    @classmethod
+    def init(cls, engine):
+        pass
 
     @classmethod
     def get_next_update(cls, clear=False):
         if cls.__nextupdate is None or clear:
-            cls.__nextupdate = time.time() + randrange(cls.timeout)
+            timeout = cls.timeout_type == 'rand' and randrange(cls.timeout) or cls.timeout
+            cls.__nextupdate = time.time() + timeout
         return cls.__nextupdate
 
     @classmethod

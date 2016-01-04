@@ -25,6 +25,7 @@ class AuthMixin(object):
         if user is None:
             raise Exception('no such user!')
         self.request.user = user
+        self.request.session = session_
 
 
 

@@ -34,6 +34,11 @@ gettext
 nginx with real_ip_header
 
 
+## DIST Installs:
+go to project directory /dist/brukva and run:
+sudo python setup.py install
+to install brukva tornado async redis support;
+
 ## Be sure, that:
 
 0. make sure you set up lists of groups and users.

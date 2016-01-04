@@ -1,3 +1,4 @@
+import logging
 import os
 import redis
 import string, random
@@ -7,7 +8,8 @@ class RedisSessions(object):
     expire = None
     session_size=16
 
-    redis_ident = os.path.abspath('')
+    ##redis_ident = os.path.abspath('')
+    redis_ident = 'mygw_sessions_'
     redis = redis.Redis()
 
     @staticmethod
@@ -28,6 +30,7 @@ class RedisSessions(object):
             key = "%s_%s" % (ident, key)
         if expire is None:
             return cls_.redis.set(cls_.redis_ident + key, val)
+        ##logging.error('SESSION: %s' % (cls_.redis_ident + key))
         return cls_.redis.setex(cls_.redis_ident + key, val, expire)
 
 
