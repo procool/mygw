@@ -24,7 +24,10 @@ class systemHandler(tornado.web.RequestHandler):
                 'reason': 'by myGW Control HTTP Server'
             }
             cmd_ = cmd_shutdown % params
-            subprocess.Popen(cmd_, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,)
+            def new_task():
+                subprocess.Popen(cmd_, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,)
+            engine = self.application.server.engine
+            engine.add_task(new_task, name='system', command=command)
             return {}
 
         return 404

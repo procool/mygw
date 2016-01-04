@@ -114,6 +114,14 @@ function admin_load_part(part, route) {
         admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'sys_srv_dhcp') {
         admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
+    } else if (part == 'notes') {
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
+    } else if (part == 'tools_speed') {
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
+    } else if (part == 'tools_ping') {
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
+    } else if (part == 'tools_traceroute') {
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     }
 }
 

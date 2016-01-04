@@ -5,6 +5,14 @@
   <div id="cssmenu">
     <ul>
       <li><a href="#adminko/status"><span>STATUS</span></a></li>
+      <li><a href="#adminko/notes"><span>NOTES</span></a></li>
+      <li class="has-sub"><a href="#adminko/tools"><span>TOOLS</span></a>
+        <ul>
+          <li><a href="#adminko/tools_speed"><span>SPEED TEST</span></a></li>
+          <li><a href="#adminko/tools_ping"><span>Ping</span></a></li>
+          <li><a href="#adminko/tools_traceroute"><span>Traceroute</span></a></li>
+        </ul>
+      </li>
       <li class="has-sub"><a href="#adminko/network"><span>NETWORK</span></a>
         <ul>
           <li><a href="#adminko/nw_access_lists"><span>Access lists</span></a></li>
