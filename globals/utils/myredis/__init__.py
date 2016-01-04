@@ -146,8 +146,6 @@ class myRedis(object):
             message, self.pack = self.pack, []
 
         logging.debug("REDIS: SENDMESSAGE(from pack=%s): %s" % (from_pack, message))
-        logging.info("REDIS: SENDMESSAGE(from pack=%s): %s" % (from_pack, message))
         self.c.publish(channel, json.dumps(message))
-        logging.info("REDIS: SENDMESSAGE2(from pack=%s): %s" % (from_pack, message))
 
 
