@@ -5,7 +5,7 @@ import logging
 import tornado.web
 
 from utils.plugins import Plugins
-from utils.myredis import myRedis, Message
+from utils.myredis import myRedis, Message as RedisMSG
 
 from handlers.root import rootHandler
 from handlers.ipaccess import ipAccessHandler
@@ -31,11 +31,23 @@ application = tornado.web.Application([
 class coreEngine(object):
 
     server_name = 'myGW Control Server'
+    redis = myRedis(instance='mygwcontrold', channel='statusd_channel')
 
     def __init__(self, server):
         self.server = server
         self.tasks = []
         self.plugins = Plugins
+
+
+    @classmethod
+    def logaction(cls, **kwargs):
+        data = {
+            'owner': 'mygwcontrold',
+            'ident': 'undefined',
+        }
+        data.update(kwargs)
+        cls.redis.send(RedisMSG(**data))
+        return True
 
 
     def add_task(self, task, **details):

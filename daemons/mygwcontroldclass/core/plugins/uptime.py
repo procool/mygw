@@ -12,10 +12,9 @@ class upTime(Extention):
     @classmethod
     def get_uptime(cls, engine):
         proc = subprocess.Popen(cls.cmd, shell=True, stdout=subprocess.PIPE)
-        answ = proc.stdout.readline()
-        over = os.getloadavg()
-        logging.info("UPTIME: %s" % answ)
-        logging.info("OVER: %s" % str(over))
+        uptime_ = proc.stdout.readline()
+        avg = os.getloadavg()
+        engine.logaction(ident='plugin_uptime', uptime=uptime_, load_average=avg)
 
 
 

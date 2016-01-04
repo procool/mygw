@@ -24,9 +24,10 @@ class systemHandler(tornado.web.RequestHandler):
                 'reason': 'by myGW Control HTTP Server'
             }
             cmd_ = cmd_shutdown % params
-            def new_task():
-                subprocess.Popen(cmd_, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,)
             engine = self.application.server.engine
+            def new_task():
+                engine.logaction(ident='handler_system', command=command)
+                subprocess.Popen(cmd_, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,)
             engine.add_task(new_task, name='system', command=command)
             return {}
 

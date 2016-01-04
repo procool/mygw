@@ -128,7 +128,7 @@ class myRedis(object):
 
     ## Send message to Redis:
     def send(self, message, **kwargs):
-        msg = message.as_dict()
+        msg = message
         if self.use_gevent:
             gevent.spawn(self._send, msg, **kwargs)
         else:
