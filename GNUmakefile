@@ -46,6 +46,7 @@ configs-freebsd: init
 	@mkdir -p /usr/local/etc/nginx/sites-enabled
 	@ln -sf ${CONFIG}/nginx.conf /usr/local/etc/nginx/sites-enabled/mygw.conf
 	@ln -sf ${SCRIPTS}/startup.sh /usr/local/etc/rc.d/z_mygw_startup.sh
+	@ln -sf ${WEB}/assets ${WEB}/static
 	@cp ${CONFIG}/dhcpd.conf /usr/local/etc/dhcpd.conf
 	@cp ${CONFIG}/named.conf /usr/local/etc/namedb/named.conf
 	@cp ${CONFIG}/named.local-zone.conf /usr/local/etc/namedb/master/${DOMAIN}
