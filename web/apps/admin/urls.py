@@ -3,6 +3,7 @@ from views import adminView
 from auth import loginView, testloginView, logOutView
 
 from views import statusView, shutdownView
+from users import usersView
 
 
 namespases = make_urls(
@@ -12,6 +13,7 @@ namespases = make_urls(
     Url('logout/', logOutView(), name="logout"),
     Url('status/', statusView(), name="status"),
     Url('system/shutdown/<command>/', shutdownView(), name="system_shutdown"),
+    Url('users/', usersView(), name="users"),
 )
 
 

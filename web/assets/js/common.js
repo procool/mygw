@@ -132,7 +132,7 @@ function admin_load_part(part, route) {
     } else if (part == 'nw_dns') {
         admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'sys_users') {
-        admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
+        admin_load($('.admin_content_wrapper'), COMMON_URLS['admin_sysusers']);
     } else if (part == 'sys_srv_vpn') {
         admin_load($('.admin_content_wrapper'), COMMON_URLS['underconstruction']);
     } else if (part == 'sys_srv_dns') {

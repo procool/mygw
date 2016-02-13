@@ -9,5 +9,6 @@ var COMMON_URLS = {
     'admin_status': '{{ url_for('admin:status') }}',
     'admin_sys_reboot': '{{ url_for('admin:system_shutdown', command='reboot') }}',
     'admin_sys_poweroff': '{{ url_for('admin:system_shutdown', command='poweroff') }}',
+    'admin_sysusers': '{{ url_for('admin:users') }}',
     'underconstruction': '{{ url_for('mainpage:underconstruction') }}'
 };

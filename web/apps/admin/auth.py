@@ -1,5 +1,6 @@
 import logging
 import sha
+import datetime
 
 from flask import redirect, url_for, abort, session as flask_session
 from flaskcbv.view import View
@@ -24,6 +25,13 @@ class AuthMixin(object):
         user = session.query(Users).filter(Users.id==uid).first()
         if user is None:
             raise Exception('no such user!')
+        try: 
+            user.lastupdate = datetime.datetime.now()
+            session.add(user)
+            session.commit()
+        except Exception as err:
+            logging.error('Error on save user last update: %s' % err)
+         
         self.request.user = user
         self.request.session = session_
 
