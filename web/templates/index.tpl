@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>myECAD Project</title>
+    <title>My GateWay</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/index.css">
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}/css/normalize.css">
