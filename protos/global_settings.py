@@ -11,6 +11,10 @@ IP_EXT            = '@IP_EXT@'
 DATABASES = {
     'default': {
         'URI': '@DB_TYPE_IDENT@://@DB_USER@:@DB_PASS@@@DB_HOST@:@DB_PORT@/@DB_NAME@',
+        'SA': { 
+            'echo': False,
+            'pool_recycle': 3600,
+        },
     },
 }
 

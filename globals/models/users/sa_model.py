@@ -1,7 +1,10 @@
 from sqlalchemy import Table, Column, Integer, String, Boolean, ForeignKey, DateTime
 from sqlalchemy.sql import func
 
-class Users(object):
+from models.base import Base
+
+
+class Users(Base):
     __tablename__ = 'users'
     id  = Column(Integer, primary_key=True) 
     login  = Column(String(32), default=False)

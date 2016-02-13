@@ -10,11 +10,10 @@ settings = Settings()
 db_data = settings.DATABASES['default']
 db_uri = db_data['URI']
 
-db_echo = False
-if 'ECHO' in db_data:
-    db_echo = db_data['ECHO']
- 
-engine = create_engine(db_uri, echo=db_echo)
+connection_params = {}
+if 'SA' in db_data:
+    connection_params.update(db_data['SA'])
+engine = create_engine(db_uri, **connection_params)
 Session = sessionmaker(bind=engine)
 
 session = Session()

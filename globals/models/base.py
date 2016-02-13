@@ -28,7 +28,8 @@ def get_model(model_):
     model__ = getattr(mod, model[1])
 
     ## Make new (SA)class of MODEL, Base:
-    cls_ = type(model[1], (model__, Base), {})
+    ##cls_ = type(model[1], (model__, Base), {})
+    cls_ = model__
     loaded_models[model_] = cls_
     return get_model(model_)
 
